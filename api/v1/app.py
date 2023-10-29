@@ -30,5 +30,5 @@ def page_not_found(error):
 
 if __name__ == "__main__":
     HBNB_API_HOST = environ.get("HBNB_API_HOST", "0.0.0.0")
-    HBNB_API_PORT = environ.get("HBNB_API_PORT", 5000)
+    HBNB_API_PORT = int(environ.get("HBNB_API_PORT", 5000))
     app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True)
