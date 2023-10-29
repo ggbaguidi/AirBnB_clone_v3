@@ -7,22 +7,17 @@ from models.user import User
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
-def get_users():
-    """Retrieves the list of all"""
-    users = [user.to_dict() for user in storage.all(User).values()]
-
-    return jsonify(users)
-
-
 @app_views.route('/users/<string:user_id>', methods=['GET'],
                  strict_slashes=False)
-def get_user_by_id(user_id):
+def get_user_by_id(user_id=None):
     """Retrieves a User object:"""
-    user = storage.get(User, user_id)
+    if not user_id:
+        users = [user.to_dict() for user in storage.all(User).values()]
+        return jsonify(users)
 
+    user = storage.get(User, user_id)
     if not user:
         abort(404)
-
     return jsonify(user.to_dict())
 
 
